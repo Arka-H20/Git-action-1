@@ -1,0 +1,9 @@
+name : test_wf1
+on: issue_comment
+jobs:
+    arka2:
+        runs-on : ubuntu-latest
+        steps:
+            - name: get Context
+              run : echo "{{ toJSON(github) }}"
+        
