@@ -1,0 +1,17 @@
+name : test_wf1
+on: push
+jobs: 
+    arka1:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+              uses: actions/checkout@v4
+            - name: install dependencies
+              run: npm ci
+            - name: running tests
+              run: |
+                echo "running tests"
+                npm test
+
+
+
