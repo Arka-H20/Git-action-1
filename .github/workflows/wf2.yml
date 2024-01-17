@@ -1,4 +1,4 @@
-name : test_wf1
+name : test_wf2
 on: issues
 jobs:
     arka2:
