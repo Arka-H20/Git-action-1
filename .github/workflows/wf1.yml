@@ -8,10 +8,16 @@ jobs:
               uses: actions/checkout@v4
             - name: install dependencies
               run: npm ci
-            - name: running tests
+            - name: run Lint
+              run : npm run lint
+            - name: run tests
               run: |
                 echo "running tests"
                 npm test
+            - name: Build
+              run : npm run build
+            - name: Run Deploy
+              run : echo "Deploying...."
 
 
 
