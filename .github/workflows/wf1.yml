@@ -10,6 +10,8 @@ jobs:
               run: npm ci
             - name: run Lint
               run : npm run lint
+            - name: run Test
+              run: npm run Test
     Build:
         needs: Test
         runs-on: ubuntu-latest
@@ -20,6 +22,13 @@ jobs:
               run: npm ci
             - name: Build
               run : npm run build
+            - name : upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                name: my_artifact
+                path: |
+                  dist
+                  package.json
     Deploy:
         needs: Build
         runs-on: ubuntu-latest
