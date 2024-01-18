@@ -35,6 +35,12 @@ jobs:
         steps:
            - name: Run Deploy
              run : echo "Deploying...."
+           - name: Download artifacts
+             uses: actions/download-artifact@v4
+             with:
+              name: my_artifact
+           - name: Output Contents
+             run: ls
 
 
 
