@@ -15,6 +15,8 @@ jobs:
     Build:
         needs: Test
         runs-on: ubuntu-latest
+        outputs: 
+          JSfilename : ${{ steps.publish.outputs.filename}}
         steps:
             - name: get code
               uses: actions/checkout@v4
@@ -22,6 +24,9 @@ jobs:
               run: npm ci
             - name: Build
               run : npm run build
+            - name: list JS files
+              id: publish
+              run: find dist/asstes/*.js -type f -exec echo 'filename={}' >> $GITHUB_OUTPUT \;
             - name : upload artifacts
               uses: actions/upload-artifact@v4
               with:
