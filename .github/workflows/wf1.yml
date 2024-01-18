@@ -56,6 +56,8 @@ jobs:
               name: my_artifact
            - name: Output Contents
              run: ls
+           - name: Output JS filename
+             run: echo '${{ needs.Build.outputs.JSfilename}}'
 
 
 
