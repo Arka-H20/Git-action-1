@@ -1,7 +1,7 @@
 name : test_wf1
 on: push
 jobs: 
-    arka1:
+    Test:
         runs-on: ubuntu-latest
         steps:
             - name: get code
@@ -18,6 +18,20 @@ jobs:
               run : npm run build
             - name: Run Deploy
               run : echo "Deploying...."
+    Build:
+        needs: Test
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+                uses: actions/checkout@v4
+              - name: install dependencies
+                run: npm ci
+              - name: Build
+                run : npm run build
+              - name: Run Deploy
+                run : echo "Deploying...."
+    
+    Deploy:
 
 
 
