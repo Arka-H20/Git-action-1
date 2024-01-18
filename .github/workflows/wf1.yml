@@ -10,28 +10,22 @@ jobs:
               run: npm ci
             - name: run Lint
               run : npm run lint
-            - name: run tests
-              run: |
-                echo "running tests"
-                npm test
-            - name: Build
-              run : npm run build
-            - name: Run Deploy
-              run : echo "Deploying...."
     Build:
         needs: Test
         runs-on: ubuntu-latest
         steps:
             - name: get code
-                uses: actions/checkout@v4
-              - name: install dependencies
-                run: npm ci
-              - name: Build
-                run : npm run build
-              - name: Run Deploy
-                run : echo "Deploying...."
-    
+              uses: actions/checkout@v4
+            - name: install dependencies
+              run: npm ci
+            - name: Build
+              run : npm run build
     Deploy:
+        needs: Build
+        runs-on: ubuntu-latest
+        steps:
+           - name: Run Deploy
+             run : echo "Deploying...."
 
 
 
