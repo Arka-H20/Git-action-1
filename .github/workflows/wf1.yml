@@ -6,6 +6,11 @@ jobs:
         steps:
             - name: get code
               uses: actions/checkout@v4
+            - name: Cache Dependencies
+              uses: actions/cache@v4
+              with:
+                path: ~/.npm
+                key: ${{ hashFiles('**/package-lock.json')}}
             - name: install dependencies
               run: npm ci
             - name: run Lint
@@ -18,6 +23,11 @@ jobs:
         outputs: 
           JSfilename : ${{ steps.publish.outputs.filename}}
         steps:
+            - name: Cache Dependencies
+              uses: actions/cache@v4
+              with:
+                path: ~/.npm
+                key: ${{ hashFiles('**/package-lock.json')}}
             - name: get code
               uses: actions/checkout@v4
             - name: install dependencies
@@ -26,7 +36,7 @@ jobs:
               run : npm run build
             - name: list JS files
               id: publish
-              run: find dist/assets/*.js -type f -exec echo 'filename={}' >> $GITHUB_OUTPUT ';'
+              run: find dist/assets/*.js -type f -execdir echo 'filename={}' >> $GITHUB_OUTPUT ';'
             - name : upload artifacts
               uses: actions/upload-artifact@v4
               with:
